@@ -39,6 +39,8 @@ const uint8 b2_nullFeature = UCHAR_MAX;
 /// This must be 4 bytes or less.
 struct b2ContactFeature
 {
+	b2ContactFeature() = default;
+
 	enum Type
 	{
 		e_vertex = 0,
@@ -70,6 +72,8 @@ union b2ContactID
 /// provide reliable contact forces, especially for high speed collisions.
 struct b2ManifoldPoint
 {
+	b2ManifoldPoint() {}
+
 	b2Vec2 localPoint;		///< usage depends on manifold type
 	float32 normalImpulse;	///< the non-penetration impulse
 	float32 tangentImpulse;	///< the friction impulse
@@ -94,6 +98,8 @@ struct b2ManifoldPoint
 /// This structure is stored across time steps, so we keep it small.
 struct b2Manifold
 {
+	b2Manifold() {}
+
 	enum Type
 	{
 		e_circles,
@@ -104,13 +110,15 @@ struct b2Manifold
 	b2ManifoldPoint points[b2_maxManifoldPoints];	///< the points of contact
 	b2Vec2 localNormal;								///< not use for Type::e_points
 	b2Vec2 localPoint;								///< usage depends on manifold type
-	Type type;
+	b2Manifold::Type type;
 	int32 pointCount;								///< the number of manifold points
 };
 
 /// This is used to compute the current state of a contact manifold.
 struct b2WorldManifold
 {
+	b2WorldManifold() {}
+
 	/// Evaluate the manifold with supplied transforms. This assumes
 	/// modest motion from the original state. This does not change the
 	/// point count, impulses, etc. The radii must come from the shapes
@@ -140,6 +148,8 @@ void b2GetPointStates(b2PointState state1[b2_maxManifoldPoints], b2PointState st
 /// Used for computing contact manifolds.
 struct b2ClipVertex
 {
+	b2ClipVertex() {}
+
 	b2Vec2 v;
 	b2ContactID id;
 };
@@ -155,6 +165,8 @@ struct b2RayCastInput
 /// come from b2RayCastInput.
 struct b2RayCastOutput
 {
+	b2RayCastOutput() {}
+
 	b2Vec2 normal;
 	float32 fraction;
 };
